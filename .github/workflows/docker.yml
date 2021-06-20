@@ -51,3 +51,4 @@ jobs:
         run: |
           docker buildx build --build-arg SSH_PRIVATE_KEY="${SSH_PRIVATE_KEY}" --output "type=image,push=true" --platform=linux/amd64,linux/arm/v6,linux/arm/v7,linux/arm64,linux/s390x --tag sxx1314/Ditto:${{steps.version.outputs.result}} docker/
           docker buildx build --build-arg SSH_PRIVATE_KEY="${SSH_PRIVATE_KEY}" --output "type=image,push=true" --platform=linux/amd64,linux/arm/v6,linux/arm/v7,linux/arm64,linux/s390x --tag sxx1314/Ditto:latest docker/
+
