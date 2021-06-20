@@ -1,10 +1,10 @@
 <p align="center">
-  <a href="https://github.com/whyour/qinglong">
-    <img width="150" src="https://qinglong.whyour.cn/qinglong.png">
+  <a href="https://github.com/sxx1314/Ditto">
+    <img width="150" src="https://raw.githubusercontent.com/sxx1314/Ditto/master/ditto.jpg">
   </a>
 </p>
 
-<h1 align="center">青龙(WIP)</h1>
+<h1 align="center">百变怪（青龙fork）</h1>
 
 <div align="center">
 
