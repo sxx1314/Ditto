@@ -12,7 +12,6 @@ python和javaScript的定时任务管理面板
 
 [![donate][donate-image]][donate-url] [![build status][build-status-image]][build-status-url] [![docker pulls][docker-pulls-image]][docker-pulls-url] [![docker version][docker-version-image]][docker-version-url] [![docker stars][docker-stars-image]][docker-stars-url] [![docker image size][docker-image-size-image]][docker-image-size-url]
 
-[donate-image]: https://img.shields.io/badge/donate-wechat-green?style=for-the-badge
 [donate-url]: https://qinglong.whyour.cn/nice.png
 [build-status-image]: https://img.shields.io/docker/cloud/build/whyour/qinglong?style=for-the-badge
 [build-status-url]: https://img.shields.io/docker/cloud/build/sxx1314/ditto
