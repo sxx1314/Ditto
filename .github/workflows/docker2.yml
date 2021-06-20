@@ -1,47 +1,53 @@
-# This workflow uses actions that are not certified by GitHub.
-# They are provided by a third-party and are governed by
-# separate terms of service, privacy policy, and support
-# documentation.
-
-# This workflow will install Deno and run tests across stable and canary builds on Windows, Ubuntu and macOS.
-# For more information see: https://github.com/denoland/setup-deno
-
-name: Deno
-
+name: Publish Docker Image
 on:
   push:
-    branches: [master]
-  pull_request:
-    branches: [master]
+    tags:
+      - v*
 
 jobs:
-  test:
-    runs-on: ${{ matrix.os }} # runs a test on Ubuntu, Windows and macOS
-
-    strategy:
-      matrix:
-        deno: ["v1.x", "canary"]
-        os: [macOS-latest, windows-latest, ubuntu-latest]
-
+  build:
+    name: Build
+    runs-on: ubuntu-latest
     steps:
-      - name: Setup repo
+      - name: Checkout base
         uses: actions/checkout@v2
-
-      - name: Setup Deno
-        # uses: denoland/setup-deno@v1
-        uses: denoland/setup-deno@4a4e59637fa62bd6c086a216c7e4c5b457ea9e79
         with:
-          deno-version: ${{ matrix.deno }} # tests across multiple Deno versions
+          fetch-depth: 0
 
-      # Uncomment this step to verify the use of 'deno fmt' on each commit.
-      # - name: Verify formatting
-      #   run: deno fmt --check
+      # https://github.com/docker/setup-qemu-action
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v1
+      # https://github.com/docker/setup-buildx-action
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v1
 
-      - name: Run linter
-        run: deno lint
+      - name: Docker login
+        env:
+          DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+          DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+        run: |
+          echo "${DOCKER_PASSWORD}" | docker login --username "${DOCKER_USERNAME}" --password-stdin
 
-      - name: Cache dependencies
-        run: deno cache deps.ts
+      - name: Docker buildx image and push on master branch
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+        if: github.ref == 'refs/heads/master'
+        run: |
+          docker buildx build --build-arg SSH_PRIVATE_KEY="${SSH_PRIVATE_KEY}" --output "type=image,push=true" --platform=linux/amd64,linux/arm/v6,linux/arm/v7,linux/arm64,linux/s390x --tag sxx1314/Ditto:latest docker/
 
-      - name: Run tests
-        run: deno test -A --unstable
+      - name: Replace tag without `v`
+        if: startsWith(github.ref, 'refs/tags/')
+        uses: actions/github-script@v1
+        id: version
+        with:
+          script: |
+            return context.payload.ref.replace(/\/?refs\/tags\/v/, '')
+          result-encoding: string
+
+      - name: Docker buildx image and push on release
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+        if: startsWith(github.ref, 'refs/tags/')
+        run: |
+          docker buildx build --build-arg SSH_PRIVATE_KEY="${SSH_PRIVATE_KEY}" --output "type=image,push=true" --platform=linux/amd64,linux/arm/v6,linux/arm/v7,linux/arm64,linux/s390x --tag sxx1314/Ditto:${{steps.version.outputs.result}} docker/
+          docker buildx build --build-arg SSH_PRIVATE_KEY="${SSH_PRIVATE_KEY}" --output "type=image,push=true" --platform=linux/amd64,linux/arm/v6,linux/arm/v7,linux/arm64,linux/s390x --tag sxx1314/Ditto:latest docker/
