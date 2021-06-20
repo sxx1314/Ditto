@@ -15,15 +15,15 @@ python和javaScript的定时任务管理面板
 [donate-image]: https://img.shields.io/badge/donate-wechat-green?style=for-the-badge
 [donate-url]: https://qinglong.whyour.cn/nice.png
 [build-status-image]: https://img.shields.io/docker/cloud/build/whyour/qinglong?style=for-the-badge
-[build-status-url]: https://img.shields.io/docker/cloud/build/whyour/qinglong
-[docker-pulls-image]: https://img.shields.io/docker/pulls/whyour/qinglong?style=for-the-badge
-[docker-pulls-url]: https://hub.docker.com/r/whyour/qinglong
-[docker-version-image]: https://img.shields.io/docker/v/whyour/qinglong?style=for-the-badge
-[docker-version-url]: https://hub.docker.com/r/whyour/qinglong/tags?page=1&ordering=last_updated
-[docker-stars-image]: https://img.shields.io/docker/stars/whyour/qinglong?style=for-the-badge
-[docker-stars-url]: https://hub.docker.com/r/whyour/qinglong
-[docker-image-size-image]: https://img.shields.io/docker/image-size/whyour/qinglong?style=for-the-badge
-[docker-image-size-url]: https://hub.docker.com/r/whyour/qinglong
+[build-status-url]: https://img.shields.io/docker/cloud/build/sxx1314/ditto
+[docker-pulls-image]: https://img.shields.io/docker/pulls/sxx1314/ditto?style=for-the-badge
+[docker-pulls-url]: https://hub.docker.com/r/sxx1314/ditto
+[docker-version-image]: https://img.shields.io/docker/v/sxx1314/ditto?style=for-the-badge
+[docker-version-url]: https://hub.docker.com/r/sxx1314/ditto/tags?page=1&ordering=last_updated
+[docker-stars-image]: https://img.shields.io/docker/stars/sxx1314/ditto?style=for-the-badge
+[docker-stars-url]: https://hub.docker.com/r/sxx1314/ditto
+[docker-image-size-image]: https://img.shields.io/docker/image-size/sxx1314/ditto?style=for-the-badge
+[docker-image-size-url]: https://hub.docker.com/r/sxx1314/ditto
 
 </div>
 
